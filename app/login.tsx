@@ -1,12 +1,21 @@
-import { useState } from 'react';
-import { ActivityIndicator, Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { useState, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 import { useAuth } from './AuthContext';
+import { useRouter } from 'expo-router';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { signIn } = useAuth();
+  const { signIn, user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    // If user is already logged in, redirect to home
+    if (user) {
+      router.replace('/');
+    }
+  }, [user]);
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -23,7 +32,10 @@ export default function LoginScreen() {
     const success = await signIn(email, password);
     setIsLoading(false);
 
-    if (!success) {
+    if (success) {
+      // Navigation will be handled by AuthGuard in _layout.tsx
+      router.replace('/');
+    } else {
       Alert.alert('Error', 'Invalid credentials');
     }
   };

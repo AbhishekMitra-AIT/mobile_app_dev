@@ -47,12 +47,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       try {
         await AsyncStorage.setItem('user', email);
         setUser(email);
+        console.log('User signed in:', email);
         return true;
       } catch (error) {
         console.error('Failed to save user:', error);
         return false;
       }
     }
+    console.log('Invalid credentials');
     return false;
   };
 
