@@ -38,11 +38,11 @@ This command will move the starter code to the **app-example** directory and cre
 ## Project Structure
 ```
 app/
-├── _layout.tsx          ✅ Updated to use Stack navigator
-├── AuthContext.tsx      ✅ Same
-├── login.tsx            ✅ Same
-├── index.tsx            ✅ Updated with Settings button
-└── settings.tsx         ✅ Updated with Back button
+├── _layout.tsx          (Root layout with auth guard)
+├── AuthContext.tsx      (Authentication context)
+├── login.tsx            (Login screen)
+├── index.tsx            (Home/Dashboard)
+└── settings.tsx         (Settings)
 ```
 
 ## Learn more
